@@ -4,55 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script type="text/javascript">
 
-$(function () {
-	   var bindDatePicker = function() {
-			$(".date").datetimepicker({
-	        format:'YYYY-MM-DD',
-				icons: {
-					time: "fa fa-clock-o",
-					date: "fa fa-calendar",
-					up: "fa fa-arrow-up",
-					down: "fa fa-arrow-down"
-				}
-			}).find('input:first').on("blur",function () {
-				// check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
-				// update the format if it's yyyy-mm-dd
-				var date = parseDate($(this).val());
-
-				if (! isValidDate(date)) {
-					//create date based on momentjs (we have that)
-					date = moment().format('YYYY-MM-DD');
-				}
-
-				$(this).val(date);
-			});
-		}
-	   
-	   var isValidDate = function(value, format) {
-			format = format || false;
-			// lets parse the date to the best of our knowledge
-			if (format) {
-				value = parseDate(value);
-			}
-
-			var timestamp = Date.parse(value);
-
-			return isNaN(timestamp) == false;
-	   }
-	   
-	   var parseDate = function(value) {
-			var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
-			if (m)
-				value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
-
-			return value;
-	   }
-	   
-	   bindDatePicker();
-	 });
-</script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,8 +27,14 @@ $(function () {
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-				<li><a href="#">Link</a></li>
+				<li class="active"><a href="viewDemand">create Demand <span class="sr-only">(current)</span></a></li>
+				<li><a href="interview">Interviews</a></li>
+				<li><a href="viewProject">Projects</a></li>
+				<li><a href="#">Resources</a></li>
+				<li><a href="#">Account</a></li>
+				<li><a href="#">Trainnings</a></li>
+				<li><a href="#">SOW</a></li>
+				<li><a href="#">Invoices</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -94,6 +52,7 @@ $(function () {
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="Search">
 				</div>
+				
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
@@ -189,7 +148,7 @@ $(function () {
   						<label >Interview Date</label>
             <div class="form-group">
                 <div class='input-group date' id='interview_date'>
-                    <form:input type='text'  class="form-control" path="" onclick="bindDatePicker()" />
+                    <form:input type='date'  class="form-control" path="" onclick="bindDatePicker()" />
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
@@ -200,13 +159,22 @@ $(function () {
   						<label >Joining Date</label>
             <div class="form-group">
                 <div class='input-group date' id='datetimepickerJoining'>
-                    <form:input type='text'  class="form-control" path="" onclick="bindDatePicker()" />
+                    <form:input type='date'  class="form-control" path=""  />
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
             </div>
         </div>
-
+<select class="mdb-select md-form colorful-select dropdown-primary" multiple searchable="Search here..">
+  <option value="" disabled selected>Choose your country</option>
+  <option value="1">USA</option>
+  <option value="2">Germany</option>
+  <option value="3">France</option>
+  <option value="4">Poland</option>
+  <option value="5">Japan</option>
+</select>
+<label>Label example</label>
+<button class="btn-save btn btn-primary btn-sm">Save</button>
 					
 					<!-- Button (Double) -->
 					<div class="form-group">

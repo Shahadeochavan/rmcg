@@ -28,7 +28,13 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="viewDemand">create Demand <span class="sr-only">(current)</span></a></li>
-				<li><a href="#">Link</a></li>
+				<li><a href="interview">Interviews</a></li>
+				<li><a href="viewProject">Projects</a></li>
+				<li><a href="#">Resources</a></li>
+				<li><a href="#">Account</a></li>
+				<li><a href="#">Trainnings</a></li>
+				<li><a href="#">SOW</a></li>
+				<li><a href="#">Invoices</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Dropdown <span class="caret"></span></a>

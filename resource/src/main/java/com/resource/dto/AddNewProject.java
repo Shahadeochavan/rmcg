@@ -2,7 +2,7 @@ package com.resource.dto;
 
 
 public class AddNewProject {
-	
+	private Integer id;
 	private String proj_code;
 	private String subproj_code;
 	private String proj_description;
@@ -12,6 +12,18 @@ public class AddNewProject {
 	public AddNewProject() {
 		super();
 	}
+	
+	
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 	public String getProj_code() {
 		return proj_code;
 	}

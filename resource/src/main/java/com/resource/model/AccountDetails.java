@@ -14,7 +14,7 @@ public class AccountDetails extends BaseModel {
 	private String	acc_code;
 	private String acc_description;
 	private String	acc_type;
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="acc_id")
+	@OneToMany(mappedBy="acc_id")
 	private List<ProjectDetails> details;
 	public List<ProjectDetails> getDetails() {
 		return details;

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,8 +28,14 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-				<li><a href="#">Link</a></li>
+				<li class="active"><a href="viewDemand">create Demand <span class="sr-only">(current)</span></a></li>
+				<li><a href="interview">Interviews</a></li>
+				<li><a href="viewProject">Projects</a></li>
+				<li><a href="#">Resources</a></li>
+				<li><a href="#">Account</a></li>
+				<li><a href="#">Trainnings</a></li>
+				<li><a href="#">SOW</a></li>
+				<li><a href="#">Invoices</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -84,22 +91,22 @@
 		<div class="row">
 			<div class="col-sm-4 col-md-3">
 				<h4>Create New Project</h4>
-				<form:form modelAttribute="addNewProject"   action="/saveProject" method="POST"
+				<form:form modelAttribute= "projectForm"   action="/saveProject" method="POST"
 					class="well">
 					<!-- Form Name -->
-					<form:hidden path="id" />
+					<form:hidden path="id" /> 
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label for="user_name">Account Name</label>
-						<form:input id="acc_id" name="acc_id" path="acc_id"
+						<label for="account_name">Account Name</label>
+						<form:input id="account_name" name="account_name" path="account_name"
 							type="text" placeholder="Enter Account Name" value=""
 							class="form-control input-md" />
 					</div>
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label for="user_email">proj_code</label>
+						<label for="proj_code">proj_code</label>
 						<form:input id="proj_code" name="proj_code" path="proj_code"
 							type="text" placeholder="Enter Project Code" value=""
 							class="form-control input-md" />
@@ -119,20 +126,21 @@
 							path="proj_description" type="text" placeholder="Enter Descriptions"
 							value="" class="form-control input-md" />
 					</div>
-					<!-- Text input-->
+					<!-- date input-->
 					<div class="form-group">
 						<label>proj_start_date</label>
 						<form:input id="proj_start_date" name="proj_start_date"
-							path="proj_start_date" type="text" placeholder="Enter Start Date"
+							path="proj_start_date" type="date" placeholder="Enter Start Date"
 							value="" class="form-control input-md" />
 					</div>
-					<!-- Text input-->
+					<!-- date input-->
 					<div class="form-group">
 						<label>proj_end_date</label>
-						<form:input id="dd_res_skillset" name="proj_end_date"
-							path="proj_end_date" type="text" placeholder="Enter End Date"
+						<form:input  id="proj_end_date" name="proj_end_date"
+							path="proj_end_date" type="date" placeholder="Enter End Date"
 							value="" class="form-control input-md" />
 					</div>
+
 					<!-- Button (Double) -->
 					<div class="form-group">
 						<input type="submit" id="submit" name="submit"
@@ -143,40 +151,41 @@
 				</form:form>
 
 			</div>
-			<div class="col-sm-8 col-md-9">
+			 <div class="col-sm-8 col-md-9">
 				<h4>Demand Master</h4>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered">
 						<thead>
 							<tr>
 								<th>Id</th>
-								<th>Demand Name</th>
-								<th>Description</th>
-								<th>Required Strength</th>
-								<th>Required SkillSet</th>
+								<th>Project code</th>
+								<th>subproj_code</th>
+								<th>proj_description</th>
+								<th>proj_start_date</th>
+								<th>proj_end_date</th>
 								<th>Action</th>
 
 							</tr>
 						</thead>
 						<tbody>
 
-							<c:forEach var="dem" items="${demandlist}">
+							<c:forEach var="pro" items="${projectlist}">
 								<tr>
-									<td>${dem.id}</td>
-									<td>${dem.demand_name}</td>
-									<td>${dem.demand_description}</td>
-									<td>${dem.dd_res_strength}</td>
-									<td>${dem.dd_res_skillset}</td>
+									<td>${pro.id}</td>
+									<td>${pro.proj_code}</td>
+									<td>${pro.subproj_code}</td>
+									<td>${pro.acc_description}</td>
+									<td>${pro.dd_res_skillset}</td>
 									<td style="text-align: center"><a
-										href="deletedemand?id=${dem.id}"
-										onclick="if (!(confirm('Are you sure you want to delete this Demand?'))) return false">
+										href="deletedemand?id=${pro.id}"
+										onclick="if (!(confirm('Are you sure you want to delete this Project?'))) return false">
 											<button type="button" class="btn btn-danger btn-sm">
 												<span class="glyphicon glyphicon-trash"></span>
 											</button>
 									</a>
 
 									<a
-										href="viewDemand?id=${dem.id}"
+										href="viewDemand?id=${pro.id}"
 										onclick="if (!(confirm('Are you sure you want to edit this Demand?'))) return false">
 											<button type="button" class="btn btn-warning btn-sm">
 												<span class="glyphicon glyphicon-pencil"></span>
@@ -187,7 +196,7 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</div> 
 		</div>
 	</div>
 
@@ -196,5 +205,6 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="/res/js/bootstrap.min.js"></script>
+	
 </body>
 </html>

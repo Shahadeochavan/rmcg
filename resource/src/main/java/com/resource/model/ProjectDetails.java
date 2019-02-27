@@ -12,9 +12,9 @@ public class ProjectDetails extends BaseModel {
 	private String proj_code;
 	private String subproj_code;
 	private String proj_description;
-	private Date proj_start_date;
-	private Date proj_end_date;
-	@ManyToOne( fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	private String proj_start_date;
+	private String proj_end_date;
+	@ManyToOne
 	@JoinColumn(name="account_id")
 	private AccountDetails acc_id;
 	
@@ -41,16 +41,16 @@ public class ProjectDetails extends BaseModel {
 	public void setProj_description(String proj_description) {
 		this.proj_description = proj_description;
 	}
-	public Date getProj_start_date() {
+	public String getProj_start_date() {
 		return proj_start_date;
 	}
-	public void setProj_start_date(Date proj_start_date) {
+	public void setProj_start_date(String proj_start_date) {
 		this.proj_start_date = proj_start_date;
 	}
-	public Date getProj_end_date() {
+	public String getProj_end_date() {
 		return proj_end_date;
 	}
-	public void setProj_end_date(Date proj_end_date) {
+	public void setProj_end_date(String proj_end_date) {
 		this.proj_end_date = proj_end_date;
 	}
 	public AccountDetails getAcc_id() {

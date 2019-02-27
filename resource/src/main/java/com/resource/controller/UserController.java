@@ -1,11 +1,13 @@
 package com.resource.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -139,7 +141,7 @@ public List<DemandDetails> demandDisplay(Model model) {
 	List<DemandDetails> demlist = demandRepository.findAll();
 	return demlist;
 }
-@GetMapping("deletedemand")
+@GetMapping("/deletedemand")
 public String deleteDemand(@RequestParam("id") Integer integer) {
 	demandRepository.deleteById(integer);
 	return "redirect:/viewDemand";
@@ -148,33 +150,52 @@ public String deleteDemand(@RequestParam("id") Integer integer) {
 
 @GetMapping("/viewProject")
 public String viewProject(Model model, @RequestParam(value = "id", required = false) Integer id) {
-	ProjectDetails project= new ProjectDetails();
+	
+	System.out.println("\n\n\n\n\n  IN view Projects");
+	AddNewProject project= new AddNewProject();
 	if (id != null) {
-		project=projectRepository.findById(id).get();
+		project.setAccount_name(projectRepository.findById(id).get().getAcc_id().toString());
+		ProjectDetails details=new ProjectDetails();
+		details=projectRepository.findById(id).get();
+		project.setProj_code(details.getProj_code());
+		project.setSubproj_code(details.getSubproj_code());
+		project.setProj_description(details.getProj_description());
+		project.setProj_start_date(details.getProj_start_date());
+		project.setProj_end_date(details.getProj_end_date());
 	}
 	model.addAttribute("projectForm", project);
 
 	return "project";
 }
 @PostMapping("/saveProject")
-public String projectSave(Model model, @ModelAttribute AddNewProject addNewProject) {
+public String projectSave(Model model, @ModelAttribute AddNewProject addNewProject ) {
 	AccountDetails account=new AccountDetails();
-	account.setAcc_name(addNewProject.getAccount_name());
+	account.setId(1);
 	ProjectDetails proj=new ProjectDetails();
 	proj.setProj_code(addNewProject.getProj_code());
 	proj.setProj_description(addNewProject.getProj_description());
 	//proj.setProj_start_date(addNewProject.getProj_start_date());
 	//proj.setProj_end_date(addNewProject.getProj_end_date());
-	proj.getAcc_id().setAcc_name(addNewProject.getAccount_name());;
+	
+	proj.setAcc_id(account);
 	projectRepository.save(proj);
 	return "redirect:/viewProject";
 }
 @ModelAttribute("projectlist")
-public List<ProjectDetails> projectDisplay(Model model) {
-	List<ProjectDetails> prolist = projectRepository.findAll();
+public List<AddNewProject> projectDisplay(Model model) {
+	List<ProjectDetails> prodetailslist = projectRepository.findAll();
+	List<AddNewProject> prolist=new ArrayList<>();
+	for( ProjectDetails prod:prodetailslist) {
+		AddNewProject protemp=new AddNewProject();
+		protemp.setProj_code(prod.getProj_code());
+		protemp.setProj_description(prod.getProj_description());
+		protemp.setSubproj_code(prod.getSubproj_code());
+	//	protemp.setAccount_name();
+	}
+	
 	return prolist;
 }
-@GetMapping("deleteProject")
+@GetMapping("/deleteProject")
 public String deleteProject(@RequestParam("id") Integer integer) {
 	projectRepository.deleteById(integer);
 	return "redirect:/viewProject";
